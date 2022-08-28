@@ -7,36 +7,18 @@ import (
 )
 
 func TestAddTextToImage(t *testing.T) {
-	type args struct {
-		imageData ImageData
-	}
-	tests := []struct {
-		name string
-		args args
-	}{
-		{
-			name: "test create img with text",
-			args: args{ImageData{
-				BgImgPath: "./assets/image.jpg",
-				FontPath:  "./assets/DancingScript-VariableFont_wght.ttf",
-				FontSize:  30,
-				Text:      "Im a Cat!",
-				X:         112.5,
-				Y:         12,
-				Color:     color.Black,
-			},
-			},
-		},
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			got, _ := AddTextToImage(tt.args.imageData)
-			Save(got, "test.png")
-			if _, err := os.Stat("../test.png"); (err != nil) != true {
-				t.Errorf("CreateScoreInDb() error = %v, wantErr %v", err, true)
-			}
-		})
-	}
+
+	img := NewImage("./assets/image.jpg")
+	img.AddTextToImage("Im a Cat!", 112.5, 12, 30, "./assets/DancingScript-VariableFont_wght.ttf", color.Black)
+	img.Save("test.png")
+
+	t.Run("Test create Image", func(t *testing.T) {
+
+		if _, err := os.Stat("../test.png"); (err != nil) != true {
+			t.Errorf("CreateScoreInDb() error = %v, wantErr %v", err, true)
+		}
+	})
+
 }
 
 func TestAddTextToImageExpectFail(t *testing.T) {
@@ -76,7 +58,8 @@ func TestAddTextToImageExpectFail(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			_, err := AddTextToImage(tt.args.imageData)
+			img := NewImage(tt.args.imageData.BgImgPath)
+			err := img.AddTextToImage(tt.args.imageData.Text, tt.args.imageData.X, tt.args.imageData.Y, tt.args.imageData.FontSize, tt.args.imageData.FontPath, tt.args.imageData.Color)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("AddTextToImage() error = %v, wantErr %v", err, tt.wantErr)
 				return
