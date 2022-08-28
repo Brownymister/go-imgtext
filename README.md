@@ -7,6 +7,11 @@ Simple Go package for adding Text to an Image
 go get github.com/Brownymister/imgtext
 ```
 
+### testing
+```bash
+go test ./... -cover
+```
+
 # Exmaple
 
 Simple example of creating a new image with an specified text.
