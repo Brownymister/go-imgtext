@@ -17,20 +17,11 @@ go test ./... -cover
 Simple example of creating a new image with an specified text.
 
 ```go
-imageData := ImageData
-    {
-        BgImgPath: "/path/to/original/image",
-        FontPath:  "/path/to/a/ttf/file",
-        FontSize:  30,
-        Text:      "Im a Cat!",
-        X:         112.5,
-        Y:         12,
-        Color:     color.Black,
-    }
-
-// ceate new image
-img := AddTextToImage(imageData)
-// save created image with path
-Save(img, "path/whete/new/image/has/to/be/saved")
+    // init a new Image instance
+    img := NewImage("./assets/image.jpg")
+    // add Text to Image
+	img.AddTextToImage("Im a Cat!", 112.5, 12, 30, "./assets/DancingScript-VariableFont_wght.ttf", color.Black)
+    // save Image on drive
+	img.Save("test.png")
 
 ```
