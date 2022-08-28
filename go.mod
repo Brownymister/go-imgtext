@@ -1,4 +1,4 @@
-module imgtext
+module github.com/Brownymister/imgtext
 
 go 1.18
 
