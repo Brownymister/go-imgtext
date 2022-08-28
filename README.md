@@ -1,2 +1,2 @@
 # go-imgtext
-Go package for adding Text to an Image
+Simple Go package for adding Text to an Image
