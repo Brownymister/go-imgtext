@@ -1,4 +1,4 @@
-module imgtext
+module go-imgtext
 
 go 1.18
 
