@@ -2,6 +2,7 @@ package imgtext
 
 import (
 	"image/color"
+	"os"
 	"testing"
 )
 
@@ -31,6 +32,9 @@ func TestAddTextToImage(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			got, _ := AddTextToImage(tt.args.imageData)
 			Save(got, "test.png")
+			if _, err := os.Stat("../test.png"); (err != nil) != true {
+				t.Errorf("CreateScoreInDb() error = %v, wantErr %v", err, true)
+			}
 		})
 	}
 }
